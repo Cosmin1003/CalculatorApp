@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace Calculator;
+namespace CalculatorApp;
 
 /// <summary>
 /// Interaction logic for App.xaml
