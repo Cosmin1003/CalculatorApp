@@ -18,9 +18,9 @@ namespace CalculatorApp.Views
     /// <summary>
     /// Interaction logic for View2.xaml
     /// </summary>
-    public partial class View2 : UserControl
+    public partial class ProgrammerMode : UserControl
     {
-        public View2()
+        public ProgrammerMode()
         {
             InitializeComponent();
         }

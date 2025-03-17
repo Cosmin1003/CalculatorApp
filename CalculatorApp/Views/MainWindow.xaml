@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CalculatorApp.Views"
         mc:Ignorable="d"
-        Title="MainWindow1" Height="450" Width="800">
+        Title="MainWindow1" Height="600" Width="400">
     <Window.Resources>
         <!-- DataTemplates pentru fiecare tip de ViewModel -->
-        <DataTemplate DataType="{x:Type local:View1}">
-            <local:View1 />
+        <DataTemplate DataType="{x:Type local:StandardMode}">
+            <local:StandardMode />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:View2}">
-            <local:View2 />
+        <DataTemplate DataType="{x:Type local:ProgrammerMode}">
+            <local:ProgrammerMode />
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -23,7 +23,7 @@
 
         <!-- Butonul permanent -->
         <Button Content="Schimbă Interfața" 
-                Command="{Binding SchimbaInterfataCommand}" 
+                Command="{Binding SwitchInterfaceCommand}" 
                 Margin="10"/>
 
         <!-- Zona unde se afișează interfața dinamică -->

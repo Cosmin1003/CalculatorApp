@@ -22,22 +22,22 @@ namespace CalculatorApp
             }
         }
 
-        public ICommand SchimbaInterfataCommand { get; }
+        public ICommand SwitchInterfaceCommand { get; }
 
         public MainViewModel()
         {
             // Inițial, afișăm prima interfață
-            CurrentViewModel = new View1();
-            SchimbaInterfataCommand = new RelayCommand(param => SchimbaInterfata());
+            CurrentViewModel = new StandardMode();
+            SwitchInterfaceCommand = new RelayCommand(param => SwitchInterface());
         }
 
-        private void SchimbaInterfata()
+        private void SwitchInterface()
         {
             // Comută între ViewModel1 și ViewModel2
-            if (CurrentViewModel is View1)
-                CurrentViewModel = new View2();
+            if (CurrentViewModel is StandardMode)
+                CurrentViewModel = new ProgrammerMode();
             else
-                CurrentViewModel = new View1();
+                CurrentViewModel = new StandardMode();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
