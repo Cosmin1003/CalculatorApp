@@ -24,6 +24,11 @@ namespace CalculatorApp.Views
             InitializeComponent();
             DataContext = new MainViewModel();
         }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Nume: Bardas Cosmin Flavius\nGrupa: 10LF231", "About", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 
 }

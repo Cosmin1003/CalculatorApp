@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CalculatorApp.Views"
         mc:Ignorable="d"
-        Title="MainWindow1" Height="600" Width="400">
+        Title="Calculator" Height="600" Width="400"
+        ResizeMode="NoResize"
+        Background="#1E1E1E">
     <Window.Resources>
+        <Style TargetType="MenuItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#505050"/>
+            <Style.Triggers>
+                <!-- Trigger pentru schimbarea culorii la hover pe MenuItem -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#333333"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
         <!-- DataTemplates pentru fiecare tip de ViewModel -->
         <DataTemplate DataType="{x:Type local:StandardMode}">
             <local:StandardMode />
@@ -17,18 +30,57 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="20"/>
+            <!-- Meniu -->
+            <RowDefinition Height="40"/>
+            <!-- Buton schimbare interfață -->
+            <RowDefinition Height="*"/>
+            <!-- Conținut dinamic -->
         </Grid.RowDefinitions>
 
+        <!-- Meniu -->
+        <Menu Grid.Row="0" Background="#505050" Foreground="White">
+            <MenuItem Header="File" Height="20"/>
+            <MenuItem Header="Help" Height="20">
+                <MenuItem Header="About" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+
         <!-- Butonul permanent -->
-        <Button Content="Schimbă Interfața" 
-                Command="{Binding SwitchInterfaceCommand}" 
-                Margin="10"/>
+        <Button Content="{Binding ButtonText}"
+        Command="{Binding SwitchInterfaceCommand}"
+        Grid.Row="1"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Center"
+        Width="200" Height="40"
+        Margin="10,0,0,0"
+        Background="#1E1E1E"
+        Foreground="White"
+        BorderThickness="0"
+        FontSize="18">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#1E1E1E" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#333333" TargetName="Border" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
 
         <!-- Zona unde se afișează interfața dinamică -->
-        <ContentControl Grid.Row="1" 
-                        Content="{Binding CurrentViewModel}" 
-                        Margin="10"/>
+        <ContentControl Grid.Row="2" 
+                        Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

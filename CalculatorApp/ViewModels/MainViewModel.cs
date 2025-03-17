@@ -12,6 +12,8 @@ namespace CalculatorApp
     public class MainViewModel : INotifyPropertyChanged
     {
         private object _currentViewModel;
+        private string _buttonText;
+
         public object CurrentViewModel
         {
             get => _currentViewModel;
@@ -22,12 +24,23 @@ namespace CalculatorApp
             }
         }
 
+        public string ButtonText
+        {
+            get => _buttonText;
+            set
+            {
+                _buttonText = value;
+                OnPropertyChanged(nameof(ButtonText));
+            }
+        }
+
         public ICommand SwitchInterfaceCommand { get; }
 
         public MainViewModel()
         {
             // Inițial, afișăm prima interfață
             CurrentViewModel = new StandardMode();
+            ButtonText = "Standard Mode"; // Textul butonului inițial
             SwitchInterfaceCommand = new RelayCommand(param => SwitchInterface());
         }
 
@@ -35,9 +48,15 @@ namespace CalculatorApp
         {
             // Comută între ViewModel1 și ViewModel2
             if (CurrentViewModel is StandardMode)
+            {
                 CurrentViewModel = new ProgrammerMode();
+                ButtonText = "Programmer Mode"; // Schimbă textul butonului
+            }
             else
+            {
                 CurrentViewModel = new StandardMode();
+                ButtonText = "Standard Mode"; // Schimbă textul butonului
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
