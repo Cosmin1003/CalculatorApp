@@ -13,14 +13,13 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="#505050"/>
             <Style.Triggers>
-                <!-- Trigger pentru schimbarea culorii la hover pe MenuItem -->
+                <!-- Trigger for hover color change -->
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#333333"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
         
-        <!-- DataTemplates pentru fiecare tip de ViewModel -->
         <DataTemplate DataType="{x:Type local:StandardMode}">
             <local:StandardMode />
         </DataTemplate>
@@ -31,14 +30,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <!-- Meniu -->
             <RowDefinition Height="40"/>
-            <!-- Buton schimbare interfață -->
             <RowDefinition Height="*"/>
-            <!-- Conținut dinamic -->
         </Grid.RowDefinitions>
 
-        <!-- Meniu -->
+        <!-- Menu -->
         <Menu Grid.Row="0" Background="#505050" Foreground="White">
             <MenuItem Header="File" Height="20"/>
             <MenuItem Header="Help" Height="20">
@@ -46,7 +42,7 @@
             </MenuItem>
         </Menu>
 
-        <!-- Butonul permanent -->
+        <!-- SwitchInterface Button -->
         <Button Content="{Binding ButtonText}"
         Command="{Binding SwitchInterfaceCommand}"
         Grid.Row="1"
@@ -79,7 +75,7 @@
             </Button.Style>
         </Button>
 
-        <!-- Zona unde se afișează interfața dinamică -->
+        <!-- Calculator Mode Zone -->
         <ContentControl Grid.Row="2" 
                         Content="{Binding CurrentViewModel}"/>
     </Grid>
