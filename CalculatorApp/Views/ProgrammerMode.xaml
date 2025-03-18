@@ -5,8 +5,186 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CalculatorApp.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="LightGreen">
-        <TextBlock Text="Aceasta este Vizualizarea 2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+             d:DesignHeight="540" d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <!-- Style for Conversion Grids -->
+        <Style x:Key="InnerGridStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="0,5,5,5"/>
+        </Style>
+
+        <!-- Style for Conversion TextBlocks -->
+        <Style x:Key="ConversionTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+        </Style>
+
+        <Style x:Key="ConversionValueStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+        </Style>
+
+        <!-- Menu Style -->
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Background" Value="#1E1E1E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#333333"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#1E1E1E">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Display -->
+        <Border Grid.Row="0" Background="#333333" CornerRadius="5" Margin="5" Height="80"
+             HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <TextBlock x:Name="DisplayText"
+                    Text="0"
+                    FontSize="48"
+                    Foreground="White"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    TextAlignment="Right"
+                    Padding="10"
+                    FontWeight="Bold"/>
+        </Border>
+
+        <!-- Input and commands -->
+        <Grid Grid.Row="1" Background="#1E1E1E" Margin="5" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Conversion Display -->
+            <Border Grid.Row="0" Background="#1E1E1E" CornerRadius="5" VerticalAlignment="Top"
+                    Margin="0,0,0,5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- HEX Row -->
+                    <Grid Grid.Row="0" Style="{StaticResource InnerGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Green Ellipse -->
+                        <Ellipse Grid.Column="0" Width="4" Height="16" Fill="Gray" 
+                                x:Name="HexIndicator" VerticalAlignment="Center"/>
+                        
+                        <TextBlock Text="HEX" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
+                        <TextBlock Text="FFB5" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
+                    </Grid>
+
+                    <!-- DEC Row -->
+                    <Grid Grid.Row="1" Style="{StaticResource InnerGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Green Ellipse -->
+                        <Ellipse Grid.Column="0" Width="4" Height="16" Fill="Gray" 
+                                 x:Name="DecIndicator" VerticalAlignment="Center"/>
+                        
+                        <TextBlock Text="DEC" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
+                        <TextBlock Text="-75" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
+                    </Grid>
+
+                    <!-- OCT Row -->
+                    <Grid Grid.Row="2" Style="{StaticResource InnerGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Green Ellipse -->
+                        <Ellipse Grid.Column="0" Width="4" Height="16" Fill="Gray" 
+                                 x:Name="OctIndicator" VerticalAlignment="Center"/>
+                        
+                        <TextBlock Text="OCT" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
+                        <TextBlock Text="177 665" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
+                    </Grid>
+
+                    <!-- BIN Row -->
+                    <Grid Grid.Row="3" Style="{StaticResource InnerGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Green Ellipse -->
+                        <Ellipse Grid.Column="0" Width="4" Height="16" Fill="Gray" 
+                                 x:Name="BinIndicator" VerticalAlignment="Center"/>
+                        
+                        <TextBlock Text="BIN" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
+                        <TextBlock Text="1111 1111 1011 0101" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!-- Menu -->
+            <Grid Grid.Row="1" Background="#1E1E1E"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="MC" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource MenuButtonStyle}"/>
+                <Button Grid.Column="1" Content="MR" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource MenuButtonStyle}"/>
+                <Button Grid.Column="2" Content="M+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource MenuButtonStyle}"/>
+                <Button Grid.Column="3" Content="M-" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource MenuButtonStyle}"/>
+                <Button Grid.Column="4" Content="MS" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource MenuButtonStyle}"/>
+            </Grid>
+
+        </Grid>
     </Grid>
 </UserControl>
