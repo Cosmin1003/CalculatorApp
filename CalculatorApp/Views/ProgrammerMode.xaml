@@ -55,6 +55,13 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <DataTemplate DataType="{x:Type local:ProgrammerModeButtons}">
+            <local:ProgrammerModeButtons />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ProgrammerModeBinary}">
+            <local:ProgrammerModeBinary />
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid Background="#1E1E1E">
@@ -78,7 +85,7 @@
         </Border>
 
         <!-- Input and commands -->
-        <Grid Grid.Row="1" Background="#1E1E1E" Margin="5" VerticalAlignment="Top">
+        <Grid Grid.Row="1" Background="#1E1E1E" Margin="5" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="35"/>
@@ -95,7 +102,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    
+
                     <!-- HEX Row -->
                     <Grid Grid.Row="0" Style="{StaticResource InnerGridStyle}">
                         <Grid.ColumnDefinitions>
@@ -107,7 +114,7 @@
                         <!-- Green Ellipse -->
                         <Ellipse Grid.Column="0" Width="4" Height="16" Fill="Gray" 
                                 x:Name="HexIndicator" VerticalAlignment="Center"/>
-                        
+
                         <TextBlock Text="HEX" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
                         <TextBlock Text="FFB5" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
                     </Grid>
@@ -123,7 +130,7 @@
                         <!-- Green Ellipse -->
                         <Ellipse Grid.Column="0" Width="4" Height="16" Fill="Gray" 
                                  x:Name="DecIndicator" VerticalAlignment="Center"/>
-                        
+
                         <TextBlock Text="DEC" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
                         <TextBlock Text="-75" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
                     </Grid>
@@ -139,7 +146,7 @@
                         <!-- Green Ellipse -->
                         <Ellipse Grid.Column="0" Width="4" Height="16" Fill="Gray" 
                                  x:Name="OctIndicator" VerticalAlignment="Center"/>
-                        
+
                         <TextBlock Text="OCT" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
                         <TextBlock Text="177 665" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
                     </Grid>
@@ -151,11 +158,11 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!-- Green Ellipse -->
                         <Ellipse Grid.Column="0" Width="4" Height="16" Fill="Gray" 
                                  x:Name="BinIndicator" VerticalAlignment="Center"/>
-                        
+
                         <TextBlock Text="BIN" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
                         <TextBlock Text="1111 1111 1011 0101" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
                     </Grid>
@@ -173,17 +180,23 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="MC" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                <Button Grid.Column="0" Content="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource MenuButtonStyle}"
+                        Command="{Binding ShowProgrammerModeButtonsCommand}"/>
+                <Button Grid.Column="1" Content="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource MenuButtonStyle}"
+                        Command="{Binding ShowProgrammerModeBinaryCommand}"/>
+                <Button Grid.Column="2" Content="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Style="{StaticResource MenuButtonStyle}"/>
-                <Button Grid.Column="1" Content="MR" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                <Button Grid.Column="3" Content="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Style="{StaticResource MenuButtonStyle}"/>
-                <Button Grid.Column="2" Content="M+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                        Style="{StaticResource MenuButtonStyle}"/>
-                <Button Grid.Column="3" Content="M-" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                        Style="{StaticResource MenuButtonStyle}"/>
-                <Button Grid.Column="4" Content="MS" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                <Button Grid.Column="4" Content="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Style="{StaticResource MenuButtonStyle}"/>
             </Grid>
+
+            <!-- Bottom Zone -->
+            <ContentControl Grid.Row="2" Background="Transparent" 
+                            Content="{Binding CurrentInterface}"/>
 
         </Grid>
     </Grid>

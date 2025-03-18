@@ -1,5 +1,4 @@
-﻿using CalculatorApp.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,25 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CalculatorApp.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow1.xaml
+    /// Interaction logic for ProgrammerModeButtons.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProgrammerModeButtons : UserControl
     {
-        public MainWindow()
+        public ProgrammerModeButtons()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
-        }
-
-        private void About_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Nume: Bardas Cosmin Flavius\nGrupa: 10LF231", "About", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
-
 }

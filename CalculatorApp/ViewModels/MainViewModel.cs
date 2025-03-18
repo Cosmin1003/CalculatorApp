@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CalculatorApp.Views;
 
-namespace CalculatorApp
+namespace CalculatorApp.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {

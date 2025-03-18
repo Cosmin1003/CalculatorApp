@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculatorApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace CalculatorApp.Views
         public ProgrammerMode()
         {
             InitializeComponent();
+            DataContext = new ProgrammerModeViewModel();
         }
     }
 }
