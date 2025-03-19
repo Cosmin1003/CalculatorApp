@@ -6,8 +6,309 @@
              xmlns:local="clr-namespace:CalculatorApp.Views"
              mc:Ignorable="d" 
              d:DesignHeight="296" d:DesignWidth="400">
-    <Grid Background="#252525">
-        <TextBlock Text="Interfața 1" Foreground="White" FontSize="24" 
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+    <UserControl.Resources>
+        <Style x:Key="RoundedBitButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Background" Value="#1E1E1E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#333333"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RoundedDarkButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Background" Value="#333333"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#404040"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RoundedLightButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Background" Value="#404040"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#333333"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RoundedDisabledButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Background" Value="#282828"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RoundedEgalButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Background" Value="#00A36C"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#009E60"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#1E1E1E">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#636363" Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+
+        <!-- Bits Buttons-->
+        <Grid Grid.Row="1" Background="#1E1E1E"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="MC" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedBitButtonStyle}"/>
+            <Button Grid.Column="1" Content="MR" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedBitButtonStyle}"/>
+        </Grid>
+
+        <!-- Numbers and operations -->
+        <Grid Grid.Row="2" Background="#1E1E1E">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="#1E1E1E">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="A" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="1" Content="&lt;&lt;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedDarkButtonStyle}"/>
+                <Button Grid.Column="2" Content=">>" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedDarkButtonStyle}"/>
+                <Button Grid.Column="3" Content="C" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedDarkButtonStyle}"/>
+                <Button Grid.Column="4" Content="⌫" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedDarkButtonStyle}"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Background="#1E1E1E">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="B" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="1" Content="(" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedDarkButtonStyle}"/>
+                <Button Grid.Column="2" Content=")" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedDarkButtonStyle}"/>
+                <Button Grid.Column="3" Content="%" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedDarkButtonStyle}"/>
+                <Button Grid.Column="4" Content="÷" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    FontSize="25" Style="{StaticResource RoundedDarkButtonStyle}"/>
+            </Grid>
+
+            <Grid Grid.Row="2" Background="#1E1E1E">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="C" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="1" Content="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="2" Content="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="3" Content="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="4" Content="×" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    FontSize="25" Style="{StaticResource RoundedDarkButtonStyle}"/>
+            </Grid>
+
+            <Grid Grid.Row="3" Background="#1E1E1E">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="D" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="1" Content="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="2" Content="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="3" Content="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="4" Content="-" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    FontSize="30" Style="{StaticResource RoundedDarkButtonStyle}"/>
+            </Grid>
+            <Grid Grid.Row="4" Background="#1E1E1E">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="E" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="1" Content="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="2" Content="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="3" Content="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="4" Content="+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    FontSize="25" Style="{StaticResource RoundedDarkButtonStyle}"/>
+            </Grid>
+
+            <Grid Grid.Row="5" Background="#1E1E1E">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="F" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="1" Content="+/-" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="2" Content="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="3" Content="." HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    FontSize="25" Style="{StaticResource RoundedDisabledButtonStyle}"/>
+                <Button Grid.Column="4" Content="=" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    FontSize="25" Style="{StaticResource RoundedEgalButtonStyle}"/>
+            </Grid>
+        </Grid>
+
     </Grid>
 </UserControl>

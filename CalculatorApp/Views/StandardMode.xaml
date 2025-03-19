@@ -7,6 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="400">
     <UserControl.Resources>
+
+        <!--Rounded Memory Button Style-->
         <Style x:Key="RoundedMemoryButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Background" Value="#1E1E1E"/>
@@ -35,6 +37,7 @@
             </Setter>
         </Style>
 
+        <!-- Rounded Dark Button Style -->
         <Style x:Key="RoundedDarkButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Background" Value="#333333"/>
@@ -64,6 +67,7 @@
             </Setter>
         </Style>
 
+        <!-- Rounded Light Button Style -->
         <Style x:Key="RoundedLightButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Background" Value="#404040"/>
@@ -93,6 +97,7 @@
             </Setter>
         </Style>
 
+        <!-- Rounded Egal Button Style -->
         <Style x:Key="RoundedEgalButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Background" Value="#00A36C"/>
@@ -126,11 +131,13 @@
     
     <Grid Background="#1E1E1E">
         <Grid.RowDefinitions>
+            <!-- Display -->
             <RowDefinition Height="Auto"/>
+
+            <!-- Input and commands -->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <!-- Display -->
         <Border Grid.Row="0" Background="#333333" CornerRadius="5" Margin="5" Height="80"
                 HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <TextBlock x:Name="DisplayText"
@@ -144,14 +151,15 @@
                        FontWeight="Bold"/>
         </Border>
 
-        <!-- Input and commands -->
         <Grid Grid.Row="1" Background="#1E1E1E" Margin="5">
             <Grid.RowDefinitions>
+                <!-- Memory -->
                 <RowDefinition Height="30"/>
+
+                <!-- Numbers and operations -->
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <!-- Memory -->
             <Grid Grid.Row="0" Background="#1E1E1E"
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
@@ -177,7 +185,6 @@
                         Style="{StaticResource RoundedMemoryButtonStyle}"/>
             </Grid>
 
-            <!-- Numbers and operations -->
             <Grid Grid.Row="1" Background="#1E1E1E">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

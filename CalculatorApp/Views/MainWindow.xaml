@@ -9,17 +9,19 @@
         ResizeMode="NoResize"
         Background="#1E1E1E">
     <Window.Resources>
+        
+        <!-- Menu Item Style -->
         <Style TargetType="MenuItem">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="#505050"/>
             <Style.Triggers>
-                <!-- Trigger for hover color change -->
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#333333"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
         
+        <!-- Data Templates -->
         <DataTemplate DataType="{x:Type local:StandardMode}">
             <local:StandardMode />
         </DataTemplate>
@@ -27,14 +29,19 @@
             <local:ProgrammerMode />
         </DataTemplate>
     </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
+            <!-- Menu -->
             <RowDefinition Height="20"/>
+
+            <!-- SwitchInterface Button -->
             <RowDefinition Height="40"/>
+
+            <!-- Calculator Mode Zone -->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Menu -->
         <Menu Grid.Row="0" Background="#505050" Foreground="White">
             <MenuItem Header="File" Height="20"/>
             <MenuItem Header="Help" Height="20">
@@ -42,7 +49,6 @@
             </MenuItem>
         </Menu>
 
-        <!-- SwitchInterface Button -->
         <Button Content="{Binding ButtonText}"
         Command="{Binding SwitchInterfaceCommand}"
         Grid.Row="1"
@@ -75,7 +81,6 @@
             </Button.Style>
         </Button>
 
-        <!-- Calculator Mode Zone -->
         <ContentControl Grid.Row="2" 
                         Content="{Binding CurrentViewModel}"/>
     </Grid>
