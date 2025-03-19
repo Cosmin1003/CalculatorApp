@@ -26,6 +26,7 @@ namespace CalculatorApp.Views
         {
             InitializeComponent();
             DataContext = new StandardModeViewModel();
+            Loaded += (s, e) => this.Focus();
         }
     }
 }
