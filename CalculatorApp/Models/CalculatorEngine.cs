@@ -15,13 +15,25 @@ namespace CalculatorApp.Models
         // Store the current input as a string for manipulation (e.g., backspace)
         private string _currentEntry;
 
+
+        // Memory storage list
+        private List<double> _memoryList;
+
         public CalculatorEngine()
         {
+            _memoryList = new List<double>();
             ClearAll();
         }
 
         // Property for display output
         public string CurrentEntry => _currentEntry;
+
+        // Method to directly set the current value (used for selection from the memory list)
+        public void SetCurrentEntry(string entry)
+        {
+            _currentEntry = entry;
+            _isNewEntry = true;
+        }
 
         // Add a digit (e.g., "1", "2", etc.)
         public void InputDigit(string digit)
@@ -165,6 +177,65 @@ namespace CalculatorApp.Models
             number = 1 / number;
             _currentEntry = number.ToString();
             _isNewEntry = true;
+        }
+
+        // Property to expose the memory list (read-only)
+        public IReadOnlyList<double> MemoryList => _memoryList.AsReadOnly();
+
+        // Methods for memory operations
+
+        // MS – Memory Store: adds the current value to the memory list
+        public void MemoryStore()
+        {
+            double value = double.Parse(_currentEntry);
+            _memoryList.Add(value);
+            _isNewEntry = true;
+        }
+
+        // M+ – Memory Add: adds the current value to the last element in memory
+        public void MemoryAdd()
+        {
+            double value = double.Parse(_currentEntry);
+            if (_memoryList.Count == 0)
+            {
+                _memoryList.Add(value);
+            }
+            else
+            {
+                _memoryList[_memoryList.Count - 1] += value;
+            }
+            _isNewEntry = true;
+        }
+
+        // M– – Memory Subtract: subtracts the current value from the last element in memory
+        public void MemorySubtract()
+        {
+            double value = double.Parse(_currentEntry);
+            if (_memoryList.Count == 0)
+            {
+                _memoryList.Add(-value);
+            }
+            else
+            {
+                _memoryList[_memoryList.Count - 1] -= value;
+            }
+            _isNewEntry = true;
+        }
+
+        // MC – Memory Clear: clears the memory list
+        public void MemoryClear()
+        {
+            _memoryList.Clear();
+        }
+
+        // MR – Memory Recall: retrieves the last element from memory to display
+        public void MemoryRecall()
+        {
+            if (_memoryList.Count > 0)
+            {
+                _currentEntry = _memoryList[_memoryList.Count - 1].ToString();
+                _isNewEntry = true;
+            }
         }
     }
 }
