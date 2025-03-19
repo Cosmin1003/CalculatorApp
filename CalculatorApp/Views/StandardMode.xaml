@@ -4,8 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CalculatorApp.Views"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="540" d:DesignWidth="400">
+
+    <!-- InputBindings for keyboard -->
+    <UserControl.InputBindings>
+        <!-- Digits from the top row (keys D0 - D9) -->
+        <KeyBinding Key="D0" Command="{Binding DigitCommand}" CommandParameter="0"/>
+        <KeyBinding Key="D1" Command="{Binding DigitCommand}" CommandParameter="1"/>
+        <KeyBinding Key="D2" Command="{Binding DigitCommand}" CommandParameter="2"/>
+        <KeyBinding Key="D3" Command="{Binding DigitCommand}" CommandParameter="3"/>
+        <KeyBinding Key="D4" Command="{Binding DigitCommand}" CommandParameter="4"/>
+        <KeyBinding Key="D5" Command="{Binding DigitCommand}" CommandParameter="5"/>
+        <KeyBinding Key="D6" Command="{Binding DigitCommand}" CommandParameter="6"/>
+        <KeyBinding Key="D7" Command="{Binding DigitCommand}" CommandParameter="7"/>
+        <KeyBinding Key="D8" Command="{Binding DigitCommand}" CommandParameter="8"/>
+        <KeyBinding Key="D9" Command="{Binding DigitCommand}" CommandParameter="9"/>
+
+        <!-- For the numeric keypad -->
+        <KeyBinding Key="NumPad0" Command="{Binding DigitCommand}" CommandParameter="0"/>
+        <KeyBinding Key="NumPad1" Command="{Binding DigitCommand}" CommandParameter="1"/>
+        <KeyBinding Key="NumPad2" Command="{Binding DigitCommand}" CommandParameter="2"/>
+        <KeyBinding Key="NumPad3" Command="{Binding DigitCommand}" CommandParameter="3"/>
+        <KeyBinding Key="NumPad4" Command="{Binding DigitCommand}" CommandParameter="4"/>
+        <KeyBinding Key="NumPad5" Command="{Binding DigitCommand}" CommandParameter="5"/>
+        <KeyBinding Key="NumPad6" Command="{Binding DigitCommand}" CommandParameter="6"/>
+        <KeyBinding Key="NumPad7" Command="{Binding DigitCommand}" CommandParameter="7"/>
+        <KeyBinding Key="NumPad8" Command="{Binding DigitCommand}" CommandParameter="8"/>
+        <KeyBinding Key="NumPad9" Command="{Binding DigitCommand}" CommandParameter="9"/>
+
+        <!-- Enter key for "=" -->
+        <KeyBinding Key="Enter" Command="{Binding EqualCommand}"/>
+
+        <!-- Backspace for deleting the last character -->
+        <KeyBinding Key="Back" Command="{Binding BackspaceCommand}"/>
+
+        <!-- Esc for performing a Clear All ("C") operation -->
+        <KeyBinding Key="Escape" Command="{Binding ClearCommand}"/>
+    </UserControl.InputBindings>
+
     <UserControl.Resources>
 
         <!--Rounded Memory Button Style-->
@@ -140,15 +177,17 @@
         
         <Border Grid.Row="0" Background="#333333" CornerRadius="5" Margin="5" Height="80"
                 HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <TextBlock x:Name="DisplayText"
-                       Text="{Binding Display}"
-                       FontSize="48"
-                       Foreground="White"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center"
-                       TextAlignment="Right"
-                       Padding="10"
-                       FontWeight="Bold"/>
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Right">
+                <TextBlock x:Name="DisplayText"
+                           Text="{Binding Display}"
+                           FontSize="48"
+                           Foreground="White"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           TextAlignment="Right"
+                           Padding="10"
+                           FontWeight="Bold"/>
+            </Viewbox>
         </Border>
 
         <Grid Grid.Row="1" Background="#1E1E1E" Margin="5">
