@@ -27,6 +27,21 @@ namespace CalculatorApp.Views
             InitializeComponent();
             DataContext = new StandardModeViewModel();
             Loaded += (s, e) => this.Focus();
+            this.PreviewKeyDown += StandardMode_PreviewKeyDown;
+        }
+
+        private void StandardMode_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (this.DataContext is StandardModeViewModel viewModel && viewModel.EqualCommand.CanExecute(null))
+                {
+                    viewModel.EqualCommand.Execute(null);
+                    e.Handled = true;
+                }
+
+                this.Focus();
+            }
         }
     }
 }

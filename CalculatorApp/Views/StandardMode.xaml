@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:CalculatorApp.Views"
              mc:Ignorable="d"
              Focusable="True"
+             FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="540" d:DesignWidth="400">
 
     <!-- InputBindings for keyboard -->
@@ -33,6 +34,14 @@
         <KeyBinding Key="NumPad7" Command="{Binding DigitCommand}" CommandParameter="7"/>
         <KeyBinding Key="NumPad8" Command="{Binding DigitCommand}" CommandParameter="8"/>
         <KeyBinding Key="NumPad9" Command="{Binding DigitCommand}" CommandParameter="9"/>
+
+        
+        <!-- For operators (numeric keypad)  -->
+        <KeyBinding Key="Add" Command="{Binding OperatorCommand}" CommandParameter="+" />
+        <KeyBinding Key="Subtract" Command="{Binding OperatorCommand}" CommandParameter="-" />
+        <KeyBinding Key="Multiply" Command="{Binding OperatorCommand}" CommandParameter="*" />
+        <KeyBinding Key="Divide" Command="{Binding OperatorCommand}" CommandParameter="/" />
+
 
         <!-- Enter key for "=" -->
         <KeyBinding Key="Enter" Command="{Binding EqualCommand}"/>
