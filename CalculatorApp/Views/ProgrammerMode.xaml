@@ -180,17 +180,17 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                <Button Grid.Column="0" Content="A" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Style="{StaticResource MenuButtonStyle}"
                         Command="{Binding ShowProgrammerModeButtonsCommand}"/>
-                <Button Grid.Column="1" Content="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                <Button Grid.Column="1" Content="B" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Style="{StaticResource MenuButtonStyle}"
                         Command="{Binding ShowProgrammerModeBinaryCommand}"/>
-                <Button Grid.Column="2" Content="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                <Button Grid.Column="2" Content="QWORD" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Style="{StaticResource MenuButtonStyle}"/>
-                <Button Grid.Column="3" Content="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                <Button Grid.Column="3" Content="MS" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Style="{StaticResource MenuButtonStyle}"/>
-                <Button Grid.Column="4" Content="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                <Button Grid.Column="4" Content="M&#x02C5;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Style="{StaticResource MenuButtonStyle}"/>
             </Grid>
 
