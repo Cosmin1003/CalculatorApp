@@ -46,6 +46,19 @@ namespace CalculatorApp.ViewModels
 
         public MainViewModel()
         {
+            string lastMode = Properties.Settings.Default.LastMode;
+
+            if (lastMode == "Programmer")
+            {
+                CurrentViewModel = new ProgrammerMode();
+                ButtonText = "Programmer Mode";
+            }
+            else
+            {
+                CurrentViewModel = new StandardMode();
+                ButtonText = "Standard Mode";
+            }
+
             CutCommand = new RelayCommand(param => ExecuteClipboardOperation(op => op.Cut()));
             CopyCommand = new RelayCommand(param => ExecuteClipboardOperation(op => op.Copy()));
             PasteCommand = new RelayCommand(param => ExecuteClipboardOperation(op => op.Paste()));
@@ -58,9 +71,6 @@ namespace CalculatorApp.ViewModels
             });
 
 
-            // Inițial, afișăm prima interfață
-            CurrentViewModel = new StandardMode();
-            ButtonText = "Standard Mode"; // Textul butonului inițial
             SwitchInterfaceCommand = new RelayCommand(param => SwitchInterface());
         }
 
@@ -79,13 +89,17 @@ namespace CalculatorApp.ViewModels
             if (CurrentViewModel is StandardMode)
             {
                 CurrentViewModel = new ProgrammerMode();
-                ButtonText = "Programmer Mode"; // Schimbă textul butonului
+                ButtonText = "Programmer Mode";
+                Properties.Settings.Default.LastMode = "Programmer";
             }
             else
             {
                 CurrentViewModel = new StandardMode();
-                ButtonText = "Standard Mode"; // Schimbă textul butonului
+                ButtonText = "Standard Mode";
+                Properties.Settings.Default.LastMode = "Standard";
             }
+
+            Properties.Settings.Default.Save();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

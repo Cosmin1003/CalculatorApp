@@ -76,7 +76,7 @@ namespace CalculatorApp.ViewModels
         public StandardModeViewModel()
         {
             _calculator = new CalculatorEngine();
-            _language = "en";
+            _language = Properties.Settings.Default.GroupingLanguage;
             Display = _calculator.CurrentEntry;
 
             // Initialize standard calculation commands
@@ -335,11 +335,17 @@ namespace CalculatorApp.ViewModels
         public void DigitGrouping(string language)
         {
             _language = language;
-            if (double.TryParse(Display, out double number))
+            Properties.Settings.Default.GroupingLanguage = language;
+            Properties.Settings.Default.Save();
+
+            if (double.TryParse(_calculator.CurrentEntry, out double number))
             {
                 Display = FormatNumberWithGrouping(number, language);
             }
-            OnPropertyChanged(nameof(Display));
+            else
+            {
+                Display = _calculator.CurrentEntry;
+            }
         }
 
         private string FormatNumberWithGrouping(double number, string language)
