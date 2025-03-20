@@ -19,7 +19,7 @@ namespace CalculatorApp
         void Paste(); // Inserează textul copiat în display
 
         // Operație pentru digit grouping – de exemplu, adaugă separatori de mii
-        void DigitGrouping();
+        void DigitGrouping(string language);
     }
 
 }

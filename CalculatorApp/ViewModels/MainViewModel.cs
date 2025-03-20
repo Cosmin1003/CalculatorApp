@@ -49,7 +49,14 @@ namespace CalculatorApp.ViewModels
             CutCommand = new RelayCommand(param => ExecuteClipboardOperation(op => op.Cut()));
             CopyCommand = new RelayCommand(param => ExecuteClipboardOperation(op => op.Copy()));
             PasteCommand = new RelayCommand(param => ExecuteClipboardOperation(op => op.Paste()));
-            DigitGroupingCommand = new RelayCommand(param => ExecuteClipboardOperation(op => op.DigitGrouping()));
+            DigitGroupingCommand = new RelayCommand(param =>
+            {
+                if (param is string language)
+                {
+                    ExecuteClipboardOperation(op => op.DigitGrouping(language));
+                }
+            });
+
 
             // Inițial, afișăm prima interfață
             CurrentViewModel = new StandardMode();

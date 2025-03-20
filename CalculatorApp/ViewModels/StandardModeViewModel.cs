@@ -15,13 +15,21 @@ namespace CalculatorApp.ViewModels
     {
         private CalculatorEngine _calculator;
         private string _display;
+        private string _language;
 
         public string Display
         {
             get => _display;
             set
             {
-                _display = value;
+                if (double.TryParse(value, out double number))
+                {
+                    _display = FormatNumberWithGrouping(number, _language);
+                }
+                else
+                {
+                    _display = value;
+                }
                 OnPropertyChanged(nameof(Display));
             }
         }
@@ -68,6 +76,7 @@ namespace CalculatorApp.ViewModels
         public StandardModeViewModel()
         {
             _calculator = new CalculatorEngine();
+            _language = "en";
             Display = _calculator.CurrentEntry;
 
             // Initialize standard calculation commands
@@ -323,27 +332,42 @@ namespace CalculatorApp.ViewModels
             _calculator.SetCurrentEntry(Display);
         }
 
-        public void DigitGrouping()
+        public void DigitGrouping(string language)
         {
-            // Exemplu simplu: presupunând că Display reprezintă un număr,
-            // vom formata stringul cu separator de mii
+            _language = language;
             if (double.TryParse(Display, out double number))
             {
-                // Implementare proprie – fără a folosi ToString("N")
-                // Conversia la string cu gruparea cifrelor:
-                string formatted = FormatNumberWithGrouping(number);
-                Display = formatted;
+                Display = FormatNumberWithGrouping(number, language);
             }
+            OnPropertyChanged(nameof(Display));
         }
 
-        private string FormatNumberWithGrouping(double number)
+        private string FormatNumberWithGrouping(double number, string language)
         {
-            // Exemplu simplificat: separă partea întreagă de cea fracționară
+            // Se separă partea întreagă de cea zecimală
             string[] parts = number.ToString().Split('.');
             string integerPart = parts[0];
             string fractionalPart = parts.Length > 1 ? parts[1] : string.Empty;
 
-            // Inserăm separatorul de mii (de ex. virgulă) în partea întreagă
+            // Stabilim separatorii în funcție de limbă
+            string thousandSeparator, decimalSeparator;
+            switch (language?.ToLower())
+            {
+                case "ro":
+                    thousandSeparator = ".";
+                    decimalSeparator = ",";
+                    break;
+                case "en":
+                    thousandSeparator = ",";
+                    decimalSeparator = ".";
+                    break;
+                default:
+                    thousandSeparator = ",";
+                    decimalSeparator = ".";
+                    break;
+            }
+
+            // Inserăm separatorul de mii în partea întreagă
             StringBuilder sb = new StringBuilder();
             int count = 0;
             for (int i = integerPart.Length - 1; i >= 0; i--)
@@ -352,11 +376,14 @@ namespace CalculatorApp.ViewModels
                 count++;
                 if (count % 3 == 0 && i > 0 && integerPart[i - 1] != '-')
                 {
-                    sb.Insert(0, ",");
+                    sb.Insert(0, thousandSeparator);
                 }
             }
-            return fractionalPart != string.Empty ? $"{sb.ToString()}.{fractionalPart}" : sb.ToString();
+            return fractionalPart != string.Empty
+                ? $"{sb.ToString()}{decimalSeparator}{fractionalPart}"
+                : sb.ToString();
         }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;

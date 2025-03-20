@@ -47,7 +47,10 @@
                 <MenuItem Header="Cut" Command="{Binding CutCommand}" />
                 <MenuItem Header="Copy" Command="{Binding CopyCommand}" />
                 <MenuItem Header="Paste" Command="{Binding PasteCommand}" />
-                <MenuItem Header="Digit Grouping" Command="{Binding DigitGroupingCommand}" />
+                <MenuItem Header="Digit Grouping">
+                    <MenuItem Header="Group Digits (RO)" Command="{Binding DigitGroupingCommand}" CommandParameter="ro"/>
+                    <MenuItem Header="Group Digits (EN)" Command="{Binding DigitGroupingCommand}" CommandParameter="en"/>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Help" Height="20">
                 <MenuItem Header="About" Click="About_Click"/>
