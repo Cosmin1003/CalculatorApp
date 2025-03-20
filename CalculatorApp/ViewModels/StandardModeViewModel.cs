@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 
 namespace CalculatorApp.ViewModels
 {
-    public class StandardModeViewModel : INotifyPropertyChanged
+    public class StandardModeViewModel : INotifyPropertyChanged, IClipboardOperations
     {
         private CalculatorEngine _calculator;
         private string _display;
@@ -267,6 +267,95 @@ namespace CalculatorApp.ViewModels
                 _calculator.SetCurrentEntry(value.ToString());
                 UpdateDisplay();
             }
+        }
+
+
+
+        public string GetDisplayText() => Display;
+
+        public void SetDisplayText(string text)
+        {
+            Display = text;
+        }
+
+        public void Cut()
+        {
+            // Copiem textul curent în clipboard și golim displayul
+            CustomClipboard.Text = Display;
+            _calculator.ClearAll();
+            Display = _calculator.CurrentEntry;
+        }
+
+        public void Copy()
+        {
+            // Copiem textul curent în clipboard
+            CustomClipboard.Text = Display;
+        }
+
+        public void Paste()
+        {
+            string pasteText = CustomClipboard.Text;
+
+            // Dacă display-ul curent este "0", înlocuim display-ul
+            if (Display == "0")
+            {
+                // Verificăm dacă textul lipit începe cu "0" și nu este un număr zecimal (ex: "0." este permis)
+                if (pasteText.StartsWith("0") && !pasteText.StartsWith("0."))
+                {
+                    // Eliminăm zerourile inițiale
+                    pasteText = pasteText.TrimStart('0');
+
+                    // Dacă se elimină toate zerourile, asigurăm că avem cel puțin "0"
+                    if (string.IsNullOrEmpty(pasteText))
+                    {
+                        pasteText = "0";
+                    }
+                }
+
+                Display = pasteText;
+            }
+            else
+            {
+                // Dacă display-ul nu este "0", adăugăm textul lipit la sfârșit
+                Display += pasteText;
+            }
+            // Sincronizăm starea motorului calculatorului
+            _calculator.SetCurrentEntry(Display);
+        }
+
+        public void DigitGrouping()
+        {
+            // Exemplu simplu: presupunând că Display reprezintă un număr,
+            // vom formata stringul cu separator de mii
+            if (double.TryParse(Display, out double number))
+            {
+                // Implementare proprie – fără a folosi ToString("N")
+                // Conversia la string cu gruparea cifrelor:
+                string formatted = FormatNumberWithGrouping(number);
+                Display = formatted;
+            }
+        }
+
+        private string FormatNumberWithGrouping(double number)
+        {
+            // Exemplu simplificat: separă partea întreagă de cea fracționară
+            string[] parts = number.ToString().Split('.');
+            string integerPart = parts[0];
+            string fractionalPart = parts.Length > 1 ? parts[1] : string.Empty;
+
+            // Inserăm separatorul de mii (de ex. virgulă) în partea întreagă
+            StringBuilder sb = new StringBuilder();
+            int count = 0;
+            for (int i = integerPart.Length - 1; i >= 0; i--)
+            {
+                sb.Insert(0, integerPart[i]);
+                count++;
+                if (count % 3 == 0 && i > 0 && integerPart[i - 1] != '-')
+                {
+                    sb.Insert(0, ",");
+                }
+            }
+            return fractionalPart != string.Empty ? $"{sb.ToString()}.{fractionalPart}" : sb.ToString();
         }
 
 
