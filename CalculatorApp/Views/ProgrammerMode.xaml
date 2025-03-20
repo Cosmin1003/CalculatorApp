@@ -74,7 +74,7 @@
         <Border Grid.Row="0" Background="#333333" CornerRadius="5" Margin="5" Height="80"
              HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <TextBlock x:Name="DisplayText"
-                    Text="0"
+                    Text="{Binding Display}"
                     FontSize="48"
                     Foreground="White"
                     HorizontalAlignment="Right"
@@ -116,7 +116,7 @@
                                 x:Name="HexIndicator" VerticalAlignment="Center"/>
 
                         <TextBlock Text="HEX" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
-                        <TextBlock Text="FFB5" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
+                        <TextBlock Text="{Binding HexValue}" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
                     </Grid>
 
                     <!-- DEC Row -->
@@ -132,7 +132,7 @@
                                  x:Name="DecIndicator" VerticalAlignment="Center"/>
 
                         <TextBlock Text="DEC" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
-                        <TextBlock Text="-75" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
+                        <TextBlock Text="{Binding DecValue}" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
                     </Grid>
 
                     <!-- OCT Row -->
@@ -148,7 +148,7 @@
                                  x:Name="OctIndicator" VerticalAlignment="Center"/>
 
                         <TextBlock Text="OCT" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
-                        <TextBlock Text="177 665" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
+                        <TextBlock Text="{Binding OctValue}" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
                     </Grid>
 
                     <!-- BIN Row -->
@@ -164,7 +164,7 @@
                                  x:Name="BinIndicator" VerticalAlignment="Center"/>
 
                         <TextBlock Text="BIN" Grid.Column="1" Style="{StaticResource ConversionTextStyle}"/>
-                        <TextBlock Text="1111 1111 1011 0101" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
+                        <TextBlock Text="{Binding BinValue}" Grid.Column="2" Style="{StaticResource ConversionValueStyle}"/>
                     </Grid>
                 </Grid>
             </Border>

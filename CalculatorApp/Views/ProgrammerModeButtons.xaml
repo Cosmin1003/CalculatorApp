@@ -167,9 +167,9 @@
                 <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="MC" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            <Button Grid.Column="0" Content="Bitwise" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     Style="{StaticResource RoundedBitButtonStyle}"/>
-            <Button Grid.Column="1" Content="MR" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            <Button Grid.Column="1" Content="Bit shift" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     Style="{StaticResource RoundedBitButtonStyle}"/>
         </Grid>
 
@@ -193,16 +193,23 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="A" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="0" Content="A"
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="A"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
                 <Button Grid.Column="1" Content="&lt;&lt;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedDarkButtonStyle}"/>
+                        Style="{StaticResource RoundedDisabledButtonStyle}"/>
                 <Button Grid.Column="2" Content=">>" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedDarkButtonStyle}"/>
-                <Button Grid.Column="3" Content="C" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedDarkButtonStyle}"/>
-                <Button Grid.Column="4" Content="⌫" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedDarkButtonStyle}"/>
+                        Style="{StaticResource RoundedDisabledButtonStyle}"/>
+                <Button Grid.Column="3" Content="CE" 
+                        Command="{Binding ClearCommand}" 
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedDarkButtonStyle}"/>
+                <Button Grid.Column="4" Content="⌫"
+                        Command="{Binding BackspaceCommand}" 
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedDarkButtonStyle}"/>
             </Grid>
 
             <Grid Grid.Row="1" Background="#1E1E1E">
@@ -214,16 +221,25 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="B" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="0" Content="B" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="B"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
                 <Button Grid.Column="1" Content="(" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedDarkButtonStyle}"/>
+                        Style="{StaticResource RoundedDisabledButtonStyle}"/>
                 <Button Grid.Column="2" Content=")" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedDarkButtonStyle}"/>
-                <Button Grid.Column="3" Content="%" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedDarkButtonStyle}"/>
-                <Button Grid.Column="4" Content="÷" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    FontSize="25" Style="{StaticResource RoundedDarkButtonStyle}"/>
+                        Style="{StaticResource RoundedDisabledButtonStyle}"/>
+                <Button Grid.Column="3" Content="%" 
+                        Command="{Binding OperatorCommand}" 
+                        CommandParameter="%"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedDarkButtonStyle}"/>
+                <Button Grid.Column="4" Content="÷" 
+                        Command="{Binding OperatorCommand}" 
+                        CommandParameter="/"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        FontSize="25" Style="{StaticResource RoundedDarkButtonStyle}"/>
             </Grid>
 
             <Grid Grid.Row="2" Background="#1E1E1E">
@@ -235,16 +251,31 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="C" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="1" Content="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="2" Content="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="3" Content="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="4" Content="×" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    FontSize="25" Style="{StaticResource RoundedDarkButtonStyle}"/>
+                <Button Grid.Column="0" Content="C" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="C"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="1" Content="7" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="7"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="2" Content="8"
+                         Command="{Binding DigitCommand}"
+                        CommandParameter="8"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="3" Content="9" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="9"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="4" Content="×" 
+                        Command="{Binding OperatorCommand}" 
+                        CommandParameter="*"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        FontSize="25" Style="{StaticResource RoundedDarkButtonStyle}"/>
             </Grid>
 
             <Grid Grid.Row="3" Background="#1E1E1E">
@@ -256,16 +287,31 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="D" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="1" Content="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="2" Content="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="3" Content="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="4" Content="-" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    FontSize="30" Style="{StaticResource RoundedDarkButtonStyle}"/>
+                <Button Grid.Column="0" Content="D" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="D"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="1" Content="4" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="4"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="2" Content="5" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="5"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="3" Content="6" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="6"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="4" Content="-" 
+                        Command="{Binding OperatorCommand}" 
+                        CommandParameter="-"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        FontSize="30" Style="{StaticResource RoundedDarkButtonStyle}"/>
             </Grid>
             <Grid Grid.Row="4" Background="#1E1E1E">
                 <Grid.ColumnDefinitions>
@@ -276,16 +322,31 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="E" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="1" Content="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="2" Content="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="3" Content="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="4" Content="+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    FontSize="25" Style="{StaticResource RoundedDarkButtonStyle}"/>
+                <Button Grid.Column="0" Content="E"
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="E"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="1" Content="1" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="1"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="2" Content="2" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="2"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="3" Content="3" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="3"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="4" Content="+" 
+                        Command="{Binding OperatorCommand}" 
+                        CommandParameter="+"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        FontSize="25" Style="{StaticResource RoundedDarkButtonStyle}"/>
             </Grid>
 
             <Grid Grid.Row="5" Background="#1E1E1E">
@@ -297,16 +358,27 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="F" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="1" Content="+/-" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
-                <Button Grid.Column="2" Content="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="0" Content="F"
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="F"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="1" Content="+/-" 
+                        Command="{Binding ChangeSignCommand}"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
+                <Button Grid.Column="2" Content="0" 
+                        Command="{Binding DigitCommand}"
+                        CommandParameter="0"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Style="{StaticResource RoundedLightButtonStyle}"/>
                 <Button Grid.Column="3" Content="." HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    FontSize="25" Style="{StaticResource RoundedDisabledButtonStyle}"/>
-                <Button Grid.Column="4" Content="=" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    FontSize="25" Style="{StaticResource RoundedEgalButtonStyle}"/>
+                        FontSize="25" Style="{StaticResource RoundedDisabledButtonStyle}"/>
+                <Button Grid.Column="4" Content="=" 
+                        Command="{Binding OperatorCommand}" 
+                        CommandParameter="="
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        FontSize="25" Style="{StaticResource RoundedEgalButtonStyle}"/>
             </Grid>
         </Grid>
 
